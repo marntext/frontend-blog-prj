@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   contentRoot: {
     padding: 5,
     paddingLeft: 15,
-  }
+  },
 }));
 
 export default function PostCard({ item }) {
@@ -74,7 +74,7 @@ export default function PostCard({ item }) {
           root: classes.timeRoot,
         }}
       />
-      <CardContent classes={{root: classes.contentRoot}}>
+      <CardContent classes={{ root: classes.contentRoot }}>
         <LinesEllipsis
           text={item.content}
           maxLine="3"
@@ -85,13 +85,22 @@ export default function PostCard({ item }) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon style={{ fill: "white", marginRight: 5 }}/><span style={{color: 'white', fontSize: '1rem'}}>{item.like_count}</span>
+          <FavoriteIcon style={{ fill: "white", marginRight: 5 }} />
+          <span style={{ color: "white", fontSize: "1rem" }}>
+            {item.like_count}
+          </span>
         </IconButton>
         <IconButton aria-label="page visited">
-          <VisibilityIcon style={{ fill: "white", marginRight: 5 }}/><span style={{color: 'white', fontSize: '1rem'}}>{item.view_count}</span>
+          <VisibilityIcon style={{ fill: "white", marginRight: 5 }} />
+          <span style={{ color: "white", fontSize: "1rem" }}>
+            {item.view_count}
+          </span>
         </IconButton>
         <IconButton aria-label="comment count">
-          <ChatBubbleIcon style={{ fill: "white", marginRight: 5 }}/><span style={{color: 'white', fontSize: '1rem'}}>{item.comment_count}</span>
+          <ChatBubbleIcon style={{ fill: "white", marginRight: 5 }} />
+          <span style={{ color: "white", fontSize: "1rem" }}>
+            {item.comment_count}
+          </span>
         </IconButton>
       </CardActions>
     </Card>
