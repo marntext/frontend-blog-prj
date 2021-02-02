@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
-import axios from "axios";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,11 +10,12 @@ import Button from "@material-ui/core/Button";
 
 import MenuListComposition from "./NavbarMenuList";
 import { Context } from "../../context/Context";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    "& .MuiToolbar-gutters": {
+    '& .MuiToolbar-gutters': {
       paddingLeft: 5,
       paddingRight: 20,
     },
@@ -26,14 +25,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    cursor: "pointer",
+    cursor: 'pointer'
   },
+
 }));
 
 export default function Navbar() {
   const history = useHistory();
   const { token, setToken } = useContext(Context);
-  const [profile, setProfile] = useState([]);
+  const [ profile, setProfile ] = useState([]);
 
   const classes = useStyles();
 
@@ -50,10 +50,25 @@ export default function Navbar() {
     history.push("/home");
   };
 
+  // const fetchUserProfile = async (
+  //   profilePath = `http://fs-blog-app-backend-django.herokuapp.com/user/${user.id}/profile/`
+  // ) => {
+  //   try {
+  //     const result = await axios.get(profilePath);
+  //     setProfile(result?.data?.image);
+  //   } catch ({ response }) {
+  //     if (response) {
+  //       console.log("No data");
+  //     } else {
+  //       console.log("Something went wrong!");
+  //     }
+  //   }
+  // };
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar style={{ backgroundColor: "#719fb0" }}>
+        <Toolbar style={{backgroundColor:"#719fb0"}}>
           <MenuListComposition />
           <Typography
             className={classes.title}
@@ -66,25 +81,31 @@ export default function Navbar() {
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {token ? (
-              <div>
-                <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleProfileOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-              </div>
-            ) : (
-              <>
-                <Button onClick={() => history.push("/")} color="inherit">
-                  Register
-                </Button>
-              </>
-            )}
+          {token ? (
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleProfileOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Button onClick={handleLogout} color="inherit">
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Button onClick={() => history.push("/")} color="inherit">
+                Login
+              </Button>
+              <Button onClick={() => history.push("/")} color="inherit">
+                Register
+              </Button>
+            </>
+          )}
           </div>
         </Toolbar>
       </AppBar>
